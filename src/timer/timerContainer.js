@@ -1,5 +1,5 @@
 import React from "react";
-import { Timer } from "../presentetional/Timer.js";
+import { Timer } from "./timerPresenter.js";
 
 export class CalcTime extends React.Component {
   constructor(props) {

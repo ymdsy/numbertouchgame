@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 // import { isNoop } from "@babel/types";
 
-import { CalcTime } from "./contena/CalcTime";
+import { CalcTime } from "./timer/timerContainer";
 
 class App extends React.Component {
   constructor() {
