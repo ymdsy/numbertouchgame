@@ -3,6 +3,7 @@ import "./App.css";
 
 import { CalcTime } from "./timer/timerContainer";
 import { LevelContainer } from "./levelSelector/levelContainer";
+import { GameContainer } from "./gamePanel/gameContainer.js";
 
 const LEVEL_LIST = ["かんたん", 2, 3];
 
@@ -11,7 +12,7 @@ class App extends React.Component {
     super();
     this.state = {
       isGameStart: true,
-      currentLevelIndex: 1
+      currentLevelIndex: 0
     };
 
     this.setLevel = this.setLevel.bind(this);
@@ -30,6 +31,7 @@ class App extends React.Component {
           currentLevelIndex={this.state.currentLevelIndex}
         />
         <CalcTime isGameStart={this.state.isGameStart} />
+        <GameContainer currentLevelIndex={this.state.currentLevelIndex} />
       </div>
     );
   }
