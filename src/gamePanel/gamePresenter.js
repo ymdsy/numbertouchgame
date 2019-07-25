@@ -5,7 +5,13 @@ function GamePresenter(props) {
   return (
     <div>
       {props.panels.map(panel => (
-        <button value={panel}>{panel}</button>
+        <button
+          onClick={() => {
+            props.handleSelectedPanel(panel);
+          }}
+        >
+          {panel}
+        </button>
       ))}
     </div>
   );
