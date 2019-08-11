@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 
 function GamePresenter(props) {
   return (
-    <div>
+    <div className="gamePresenterBlock">
       {props.panels.map(panel => (
         <button
+          className="gamePresenter"
           onClick={() => {
             props.handleSelectedPanel(panel);
           }}

@@ -1,3 +1,31 @@
-.App {
+body {
+  float: center;
+  font-family: "Courier New", sans-self;
+  font-weight: bold;
   text-align: center;
+  margin: auto;
+  width: auto;
+}
+
+.gamePresenterBlock {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+button.gamePresenter {
+  background-color: aliceblue;
+  border: #000;
+  font-size: 20px;
+  height: 100px;
+  margin: 5px;
+  width: 100px;
+}
+
+button.levelSelector {
+  background-color: #ffb6c1;
+  font-size: 20px;
+  height: 50px;
+  margin: 5px;
+  margin-bottom: 10px;
+  width: 100px;
 }
