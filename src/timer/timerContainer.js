@@ -15,6 +15,10 @@ export class CalcTime extends React.Component {
   }
 
   start() {
+    if (this.state.timerId !== 0) {
+      return;
+    }
+
     const id = setInterval(() => {
       this.setState(state => {
         return { value: state.value + 0.05 };
@@ -26,6 +30,7 @@ export class CalcTime extends React.Component {
 
   stop() {
     clearInterval(this.state.timerId);
+    this.setState({ timerId: 0 });
   }
 
   clear() {
@@ -35,7 +40,7 @@ export class CalcTime extends React.Component {
   render() {
     return (
       <div>
-        <Timer value={this.state.value} />
+        <Timer value={this.state.value.toFixed(3)} />
         <button onClick={this.start}>start</button>
         <button onClick={this.stop}>stop</button>
         <button onClick={this.clear}>clear</button>
