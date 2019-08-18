@@ -1,12 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 function LevelSelector(props) {
+  const currentLevel = props.levelList[props.currentLevelIndex];
   return (
     <div className="levelSelectorBlock">
       {props.levelList.map((level, index) => (
         <button
-          className="levelSelector"
+          key={level}
+          className={classNames("levelSelector", {
+            levelSelector_active: level === currentLevel
+          })}
           onClick={() => {
             props.onSelect(index);
           }}
@@ -14,7 +19,6 @@ function LevelSelector(props) {
           {level}
         </button>
       ))}
-      <div>現在のレベル：{props.levelList[props.currentLevelIndex]}</div>
     </div>
   );
 }
