@@ -31,7 +31,11 @@ class App extends React.Component {
           currentLevelIndex={this.state.currentLevelIndex}
         />
         <CalcTime isGameStart={this.state.isGameStart} />
-        <GameContainer currentLevelIndex={this.state.currentLevelIndex} />
+        <GameContainer
+          currentLevelIndex={this.state.currentLevelIndex}
+          // currentLevelIndexが変更されたときにComponentを初期化する
+          key={this.state.currentLevelIndex}
+        />
       </div>
     );
   }
