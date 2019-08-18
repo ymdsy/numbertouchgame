@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function GamePresenter(props) {
   return (
-    <div className="gamePresenterBlock">
+    <div className="gamePresenterBlock" style={props.style}>
       {props.panels.map(panel => (
         <button
           className="gamePresenter"

@@ -53,18 +53,14 @@ export class GameContainer extends React.Component {
   render() {
     const panels = this.renderPanels(this.props.currentLevelIndex);
 
-    // パネルの枚数に合わせた幅を設定 TODO:
-    document
-      .querySelector("body")
-      .setAttribute(
-        "style",
-        `width: ${(panels.length / Math.sqrt(panels.length)) * 110}px;`
-      );
-
     return (
       <GamePresenter
         panelNum={this.props.currentLevelIndex}
         panels={panels}
+        style={{
+          // パネルの枚数に合わせた幅を設定
+          width: (panels.length / Math.sqrt(panels.length)) * 110
+        }}
         handleSelectedPanel={this.handleSelectedPanel}
       />
     );

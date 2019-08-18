@@ -3,13 +3,11 @@ body {
   font-family: "Courier New", sans-self;
   font-weight: bold;
   text-align: center;
-  margin: auto;
   width: auto;
 }
 
 .gamePresenterBlock {
-  display: flex;
-  flex-wrap: wrap;
+  margin: 0 auto;
 }
 
 button.gamePresenter {
