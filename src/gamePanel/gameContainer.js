@@ -27,7 +27,7 @@ export class GameContainer extends React.Component {
     if (
       this.getPanelNum(this.props.currentLevelIndex) === this.state.nextNumber
     ) {
-      console.log("finish");
+      this.props.onGameStop();
       return;
     }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { Timer } from "./timerPresenter.js";
+import memoize from "memoize-one";
 
 export class CalcTime extends React.Component {
   constructor(props) {
@@ -14,8 +15,8 @@ export class CalcTime extends React.Component {
     this.clear = this.clear.bind(this);
   }
 
-  start() {
-    if (this.state.timerId !== 0) {
+  start = memoize(isGameStart => {
+    if (this.state.timerId !== 0 || !isGameStart) {
       return;
     }
 
@@ -26,23 +27,40 @@ export class CalcTime extends React.Component {
     }, 50);
 
     this.setState({ timerId: id });
-  }
+  });
 
-  stop() {
+  stop = memoize(isGameFinished => {
+    if (!isGameFinished) {
+      return;
+    }
     clearInterval(this.state.timerId);
     this.setState({ timerId: 0 });
-  }
+  });
 
   clear() {
     this.setState({ value: 0 });
   }
 
   render() {
+    this.start(this.props.isGameStart);
+    this.stop(this.props.isGameFinished);
     return (
       <div>
         <Timer value={this.state.value.toFixed(3)} />
-        <button onClick={this.start}>start</button>
-        <button onClick={this.stop}>stop</button>
+        <button
+          onClick={() => {
+            this.props.onGameStart();
+          }}
+        >
+          start
+        </button>
+        <button
+          onClick={() => {
+            this.props.onGameStop();
+          }}
+        >
+          stop
+        </button>
         <button onClick={this.clear}>clear</button>
       </div>
     );

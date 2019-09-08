@@ -11,7 +11,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      isGameStart: true,
+      isGameStart: false,
+      isGameFinished: false,
       currentLevelIndex: 0
     };
 
@@ -22,6 +23,14 @@ class App extends React.Component {
     this.setState({ currentLevelIndex: index });
   }
 
+  startGame(flag) {
+    this.setState({ isGameStart: flag });
+  }
+
+  finishGame(flag) {
+    this.setState({ isGameFinished: flag });
+  }
+
   render() {
     return (
       <div>
@@ -30,11 +39,23 @@ class App extends React.Component {
           levelList={LEVEL_LIST}
           currentLevelIndex={this.state.currentLevelIndex}
         />
-        <CalcTime isGameStart={this.state.isGameStart} />
+        <CalcTime
+          isGameStart={this.state.isGameStart}
+          isGameFinished={this.state.isGameFinished}
+          onGameStart={() => {
+            this.startGame(true);
+          }}
+          onGameStop={() => {
+            this.finishGame(true);
+          }}
+        />
         <GameContainer
           currentLevelIndex={this.state.currentLevelIndex}
           // currentLevelIndexが変更されたときにComponentを初期化する
           key={this.state.currentLevelIndex}
+          onGameStop={() => {
+            this.finishGame(true);
+          }}
         />
       </div>
     );
