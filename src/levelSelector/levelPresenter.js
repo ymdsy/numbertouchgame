@@ -8,6 +8,7 @@ function LevelSelector(props) {
     <div className="levelSelectorBlock">
       {props.levelList.map((level, index) => (
         <button
+          disabled={props.isButtonDisabled}
           key={level}
           className={classNames("levelSelector", {
             levelSelector_active: level === currentLevel

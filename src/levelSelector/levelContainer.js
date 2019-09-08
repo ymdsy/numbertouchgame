@@ -2,6 +2,10 @@ import React from "react";
 import LevelSelector from "./levelPresenter.js";
 
 export class LevelContainer extends React.Component {
+  isButtonDisabled() {
+    return this.props.isGameStart ? true : false;
+  }
+
   render() {
     return (
       <div>
@@ -11,6 +15,7 @@ export class LevelContainer extends React.Component {
           onSelect={index => {
             this.props.onSetLevel(index);
           }}
+          isButtonDisabled={this.isButtonDisabled()}
         />
       </div>
     );

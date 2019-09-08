@@ -43,6 +43,7 @@ class App extends React.Component {
           onSetLevel={this.setLevel}
           levelList={LEVEL_LIST}
           currentLevelIndex={this.state.currentLevelIndex}
+          isGameStart={this.state.isGameStart}
         />
         <CalcTime
           isGameStart={this.state.isGameStart}
