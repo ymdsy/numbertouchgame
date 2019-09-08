@@ -52,6 +52,18 @@ export class GameContainer extends React.Component {
    */
   render() {
     const panels = this.renderPanels(this.props.currentLevelIndex);
+    if (!this.props.isGameStart) {
+      return <div />;
+    }
+
+    if (this.props.isGameFinished) {
+      return (
+        <div>
+          Game finished!! <br />
+          Please select Level.
+        </div>
+      );
+    }
 
     return (
       <GamePresenter

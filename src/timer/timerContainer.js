@@ -56,12 +56,13 @@ export class CalcTime extends React.Component {
         </button>
         <button
           onClick={() => {
-            this.props.onGameStop();
+            this.stop(true);
+            this.props.onRestartGame();
+            this.clear();
           }}
         >
-          stop
+          retry
         </button>
-        <button onClick={this.clear}>clear</button>
       </div>
     );
   }

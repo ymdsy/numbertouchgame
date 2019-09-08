@@ -23,12 +23,17 @@ class App extends React.Component {
     this.setState({ currentLevelIndex: index });
   }
 
-  startGame(flag) {
-    this.setState({ isGameStart: flag });
+  startGame() {
+    this.setState({ isGameStart: true });
   }
 
-  finishGame(flag) {
-    this.setState({ isGameFinished: flag });
+  finishGame() {
+    this.setState({ isGameFinished: true });
+  }
+
+  restartGame() {
+    this.setState({ isGameStart: false });
+    this.setState({ isGameFinished: false });
   }
 
   render() {
@@ -42,17 +47,22 @@ class App extends React.Component {
         <CalcTime
           isGameStart={this.state.isGameStart}
           isGameFinished={this.state.isGameFinished}
+          onRestartGame={() => {
+            this.restartGame();
+          }}
           onGameStart={() => {
-            this.startGame(true);
+            this.startGame();
           }}
           onGameStop={() => {
-            this.finishGame(true);
+            this.finishGame();
           }}
         />
         <GameContainer
           currentLevelIndex={this.state.currentLevelIndex}
           // currentLevelIndexが変更されたときにComponentを初期化する
           key={this.state.currentLevelIndex}
+          isGameStart={this.state.isGameStart}
+          isGameFinished={this.state.isGameFinished}
           onGameStop={() => {
             this.finishGame(true);
           }}
