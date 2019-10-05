@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-import { CalcTime } from "./timer/timerContainer";
+import { TimerContainer } from "./timer/timerContainer";
 import { LevelContainer } from "./levelSelector/levelContainer";
 import { GameContainer } from "./gamePanel/gameContainer.js";
 
@@ -45,7 +45,7 @@ class App extends React.Component {
           currentLevelIndex={this.state.currentLevelIndex}
           isGameStart={this.state.isGameStart}
         />
-        <CalcTime
+        <TimerContainer
           isGameStart={this.state.isGameStart}
           isGameFinished={this.state.isGameFinished}
           onRestartGame={() => {

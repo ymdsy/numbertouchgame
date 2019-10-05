@@ -2,7 +2,7 @@ import React from "react";
 import { TimerPresenter } from "./timerPresenter.js";
 import memoize from "memoize-one";
 
-export class CalcTime extends React.Component {
+export class TimerContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
