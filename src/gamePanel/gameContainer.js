@@ -2,7 +2,6 @@ import React from "react";
 import GamePresenter from "./gamePresenter.js";
 import memoize from "memoize-one";
 import shuffle from "lodash/shuffle";
-// import isDeepEqual from "lodash/isequal";
 
 export class GameContainer extends React.Component {
   constructor() {
@@ -32,8 +31,7 @@ export class GameContainer extends React.Component {
     }
 
     if (this.state.nextNumber === value) {
-      console.log(value);
-      this.setState({ nextNumber: value + 1 }, console.log);
+      this.setState({ nextNumber: value + 1 });
     }
   }
 
