@@ -1,5 +1,5 @@
 import React from "react";
-import { Timer } from "./timerPresenter.js";
+import { TimerPresenter } from "./timerPresenter.js";
 import memoize from "memoize-one";
 
 export class CalcTime extends React.Component {
@@ -46,7 +46,7 @@ export class CalcTime extends React.Component {
     this.stop(this.props.isGameFinished);
     return (
       <div>
-        <Timer value={this.state.value.toFixed(3)} />
+        <TimerPresenter value={this.state.value.toFixed(3)} />
         <button
           onClick={() => {
             this.props.onGameStart();
