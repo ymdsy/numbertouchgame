@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-function LevelSelector(props) {
+function LevelPresenter(props) {
   const currentLevel = props.levelList[props.currentLevelIndex];
   return (
     <div className="levelSelectorBlock">
@@ -24,9 +24,9 @@ function LevelSelector(props) {
   );
 }
 
-LevelSelector.propTypes = {
+LevelPresenter.propTypes = {
   onSelect: PropTypes.func, //引数にインデックスが渡される関数
   levelList: PropTypes.array.isRequired
 };
 
-export default LevelSelector;
+export default LevelPresenter;

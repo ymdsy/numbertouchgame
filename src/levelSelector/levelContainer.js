@@ -1,5 +1,5 @@
 import React from "react";
-import LevelSelector from "./levelPresenter.js";
+import LevelPresenter from "./levelPresenter.js";
 
 export class LevelContainer extends React.Component {
   isButtonDisabled() {
@@ -9,7 +9,7 @@ export class LevelContainer extends React.Component {
   render() {
     return (
       <div>
-        <LevelSelector
+        <LevelPresenter
           levelList={this.props.levelList}
           currentLevelIndex={this.props.currentLevelIndex}
           onSelect={index => {
