@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import "./levelPresenter.css";
 
 function LevelPresenter(props) {
   const currentLevel = props.levelList[props.currentLevelIndex];

@@ -18,16 +18,3 @@ button.gamePresenter {
   margin: 5px;
   width: 100px;
 }
-
-.levelSelector {
-  background-color: #ffb6c1;
-  font-size: 20px;
-  height: 50px;
-  margin: 5px;
-  margin-bottom: 10px;
-  width: 100px;
-}
-
-.levelSelector_active {
-  background-color: #f15e74;
-}
