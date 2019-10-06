@@ -16,11 +16,14 @@ class App extends React.Component {
       isGameStart: false,
       isGameFinished: false,
       currentLevelIndex: INIT_LEVEL_INDEX,
-      panels: this.getShuffledPanels(INIT_LEVEL_INDEX),
-      timerId: 0
+      panels: [],
+      timerId: 0,
+      timerValue: 0
     };
 
     this.setLevel = this.setLevel.bind(this);
+    this.startGame = this.startGame.bind(this);
+    this.finishGame = this.finishGame.bind(this);
   }
 
   setLevel(index) {
@@ -28,10 +31,18 @@ class App extends React.Component {
   }
 
   startGame() {
-    if (this.state.isGameStart === true) {
+    // ゲーム中に再度startボタンを押されたときに重複してタイマーを作成しないため
+    if (this.state.isGameStart === true || this.state.timerId !== 0) {
       return;
     }
 
+    const id = setInterval(() => {
+      this.setState(state => {
+        return { timerValue: state.timerValue + 0.05 };
+      });
+    }, 50);
+
+    this.setTimerId(id);
     this.setState({
       isGameStart: true,
       panels: this.getShuffledPanels(this.state.currentLevelIndex)
@@ -39,12 +50,15 @@ class App extends React.Component {
   }
 
   finishGame() {
+    clearInterval(this.state.timerId);
+    this.clearTimerId();
     this.setState({ isGameFinished: true });
   }
 
   restartGame() {
-    this.setState({ isGameStart: false });
-    this.setState({ isGameFinished: false });
+    clearInterval(this.state.timerId);
+    this.clearTimerId();
+    this.setState({ isGameStart: false, isGameFinished: false, timerValue: 0 });
   }
 
   /**
@@ -74,7 +88,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <LevelContainer
           onSetLevel={this.setLevel}
           levelList={LEVEL_LIST}
@@ -82,24 +96,11 @@ class App extends React.Component {
           isGameStart={this.state.isGameStart}
         />
         <TimerContainer
-          isGameStart={this.state.isGameStart}
-          isGameFinished={this.state.isGameFinished}
           onRestartGame={() => {
             this.restartGame();
           }}
-          onGameStart={() => {
-            this.startGame();
-          }}
-          onGameStop={() => {
-            this.finishGame();
-          }}
-          timerId={this.state.timerId}
-          clearTimerId={() => {
-            this.clearTimerId();
-          }}
-          setTimerId={id => {
-            this.setTimerId(id);
-          }}
+          onGameStart={() => this.startGame()}
+          value={this.state.timerValue}
         />
         <GameContainer
           // currentLevelIndexが変更されたときにComponentを初期化する
@@ -111,7 +112,7 @@ class App extends React.Component {
             this.finishGame(true);
           }}
         />
-      </div>
+      </>
     );
   }
 }

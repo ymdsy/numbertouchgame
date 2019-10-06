@@ -16,7 +16,14 @@ export class GameContainer extends React.Component {
    *
    */
   handleSelectedPanel(value) {
-    if (this.props.panels.length === value) {
+    console.log("nextNum", this.state.nextNumber);
+    console.log("value", value);
+
+    if (
+      this.state.nextNumber === this.props.panels.length &&
+      this.props.panels.length === value
+    ) {
+      this.setState({ nextNumber: 1 });
       this.props.onGameStop();
       return;
     }
