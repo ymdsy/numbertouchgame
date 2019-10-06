@@ -16,7 +16,7 @@ class App extends React.Component {
       isGameStart: false,
       isGameFinished: false,
       currentLevelIndex: INIT_LEVEL_INDEX,
-      nextNumber: 1,
+      nextAnswer: 1,
       panels: [],
       timerId: 0,
       timerValue: 0
@@ -49,7 +49,7 @@ class App extends React.Component {
 
   finishGame() {
     clearInterval(this.state.timerId);
-    this.setState({ isGameFinished: true, timerId: 0, nextNumber: 1 });
+    this.setState({ isGameFinished: true, timerId: 0, nextAnswer: 1 });
   }
 
   restartGame() {
@@ -57,7 +57,7 @@ class App extends React.Component {
     this.setState({
       isGameStart: false,
       isGameFinished: false,
-      nextNumber: 1,
+      nextAnswer: 1,
       timerValue: 0,
       timerId: 0
     });
@@ -77,17 +77,18 @@ class App extends React.Component {
    * ボタンがクリックされた時に、ゲームを行う
    */
   handleSelectedPanel(value) {
-    if (
-      this.state.nextNumber === this.state.panels.length &&
-      this.state.panels.length === value
-    ) {
+    // 不正解の場合は何もしない
+    if (value !== this.state.nextAnswer) {
+      return;
+    }
+
+    // ゲーム終了の場合
+    if (value === this.state.panels.length) {
       this.finishGame();
       return;
     }
 
-    if (this.state.nextNumber === value) {
-      this.setState({ nextNumber: value + 1 });
-    }
+    this.setState({ nextAnswer: value + 1 });
   }
 
   render() {
@@ -105,13 +106,10 @@ class App extends React.Component {
           value={this.state.timerValue}
         />
         <GameContainer
-          // currentLevelIndexが変更されたときにComponentを初期化する
-          key={this.state.currentLevelIndex}
           handleSelectedPanel={this.handleSelectedPanel}
           isGameStart={this.state.isGameStart}
           isGameFinished={this.state.isGameFinished}
           panels={this.state.panels}
-          onGameStop={this.finishGame}
         />
       </>
     );
