@@ -1,11 +1,13 @@
 import React from "react";
 import "./App.css";
+import shuffle from "lodash/shuffle";
 
 import { TimerContainer } from "./timer/timerContainer";
 import { LevelContainer } from "./levelSelector/levelContainer";
 import { GameContainer } from "./gamePanel/gameContainer.js";
 
-const LEVEL_LIST = ["かんたん", 2, 3];
+const LEVEL_LIST = ["かんたん", 2, 3, 7];
+const INIT_LEVEL_INDEX = 0;
 
 class App extends React.Component {
   constructor() {
@@ -13,7 +15,8 @@ class App extends React.Component {
     this.state = {
       isGameStart: false,
       isGameFinished: false,
-      currentLevelIndex: 0
+      currentLevelIndex: INIT_LEVEL_INDEX,
+      panels: this.getShuffledPanels(INIT_LEVEL_INDEX)
     };
 
     this.setLevel = this.setLevel.bind(this);
@@ -24,7 +27,10 @@ class App extends React.Component {
   }
 
   startGame() {
-    this.setState({ isGameStart: true });
+    this.setState({
+      isGameStart: true,
+      panels: this.getShuffledPanels(this.state.currentLevelIndex)
+    });
   }
 
   finishGame() {
@@ -34,6 +40,21 @@ class App extends React.Component {
   restartGame() {
     this.setState({ isGameStart: false });
     this.setState({ isGameFinished: false });
+  }
+
+  /**
+   * ランダムに並べられたパネルの配列を取得する
+   */
+  getShuffledPanels(levelIndex) {
+    const panels = [...Array(this.getPanelNum(levelIndex)).keys()].map(
+      i => i + 1
+    );
+    return shuffle(panels);
+  }
+
+  /** indexからパネルの合計枚数を計算する */
+  getPanelNum(index) {
+    return Math.pow(index + 3, 2);
   }
 
   render() {
@@ -59,11 +80,11 @@ class App extends React.Component {
           }}
         />
         <GameContainer
-          currentLevelIndex={this.state.currentLevelIndex}
           // currentLevelIndexが変更されたときにComponentを初期化する
           key={this.state.currentLevelIndex}
           isGameStart={this.state.isGameStart}
           isGameFinished={this.state.isGameFinished}
+          panels={this.state.panels}
           onGameStop={() => {
             this.finishGame(true);
           }}

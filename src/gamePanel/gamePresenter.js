@@ -51,7 +51,7 @@ function convertArr(panels) {
 }
 
 GamePresenter.propTypes = {
-  panelNum: PropTypes.number
+  panels: PropTypes.array
 };
 
 export default GamePresenter;
