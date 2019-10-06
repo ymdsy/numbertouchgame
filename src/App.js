@@ -6,7 +6,7 @@ import { TimerContainer } from "./timer/timerContainer";
 import { LevelContainer } from "./levelSelector/levelContainer";
 import { GameContainer } from "./gamePanel/gameContainer.js";
 
-const LEVEL_LIST = ["かんたん", 2, 3, 7];
+const LEVEL_LIST = ["かんたん", 2, 3, 4];
 const INIT_LEVEL_INDEX = 0;
 
 class App extends React.Component {
@@ -16,7 +16,8 @@ class App extends React.Component {
       isGameStart: false,
       isGameFinished: false,
       currentLevelIndex: INIT_LEVEL_INDEX,
-      panels: this.getShuffledPanels(INIT_LEVEL_INDEX)
+      panels: this.getShuffledPanels(INIT_LEVEL_INDEX),
+      timerId: 0
     };
 
     this.setLevel = this.setLevel.bind(this);
@@ -27,6 +28,10 @@ class App extends React.Component {
   }
 
   startGame() {
+    if (this.state.isGameStart === true) {
+      return;
+    }
+
     this.setState({
       isGameStart: true,
       panels: this.getShuffledPanels(this.state.currentLevelIndex)
@@ -57,6 +62,16 @@ class App extends React.Component {
     return Math.pow(index + 3, 2);
   }
 
+  clearTimerId() {
+    this.setTimerId(0);
+  }
+
+  setTimerId(id) {
+    this.setState({
+      timerId: id
+    });
+  }
+
   render() {
     return (
       <div>
@@ -77,6 +92,13 @@ class App extends React.Component {
           }}
           onGameStop={() => {
             this.finishGame();
+          }}
+          timerId={this.state.timerId}
+          clearTimerId={() => {
+            this.clearTimerId();
+          }}
+          setTimerId={id => {
+            this.setTimerId(id);
           }}
         />
         <GameContainer

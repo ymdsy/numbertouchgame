@@ -32,7 +32,7 @@ function GamePresenter(props) {
 /**
  *　パネル用の配列を2次元配列に変換する。
 
- *  @param {ボタンのパネル用の配列。} panels
+ *  @param ボタンのパネル用の配列 panels
  */
 function convertArr(panels) {
   const edgeLength = Math.round(Math.sqrt(panels.length));

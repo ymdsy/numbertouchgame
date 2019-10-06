@@ -1,12 +1,10 @@
 import React from "react";
 import { TimerPresenter } from "./timerPresenter.js";
-import memoize from "memoize-one";
 
 export class TimerContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timerId: 0,
       value: 0.0
     };
 
@@ -15,8 +13,8 @@ export class TimerContainer extends React.Component {
     this.clear = this.clear.bind(this);
   }
 
-  start = memoize(isGameStart => {
-    if (this.state.timerId !== 0 || !isGameStart) {
+  start = isGameStart => {
+    if (this.props.timerId !== 0 || !isGameStart) {
       return;
     }
 
@@ -26,16 +24,16 @@ export class TimerContainer extends React.Component {
       });
     }, 50);
 
-    this.setState({ timerId: id });
-  });
+    this.props.setTimerId(id);
+  };
 
-  stop = memoize(isGameFinished => {
+  stop = isGameFinished => {
     if (!isGameFinished) {
       return;
     }
-    clearInterval(this.state.timerId);
-    this.setState({ timerId: 0 });
-  });
+    clearInterval(this.props.timerId);
+    this.props.clearTimerId();
+  };
 
   clear() {
     this.setState({ value: 0 });
