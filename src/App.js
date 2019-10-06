@@ -16,6 +16,7 @@ class App extends React.Component {
       isGameStart: false,
       isGameFinished: false,
       currentLevelIndex: INIT_LEVEL_INDEX,
+      nextNumber: 1,
       panels: [],
       timerId: 0,
       timerValue: 0
@@ -25,6 +26,7 @@ class App extends React.Component {
     this.startGame = this.startGame.bind(this);
     this.finishGame = this.finishGame.bind(this);
     this.restartGame = this.restartGame.bind(this);
+    this.handleSelectedPanel = this.handleSelectedPanel.bind(this);
   }
 
   setLevel(index) {
@@ -32,10 +34,7 @@ class App extends React.Component {
   }
 
   startGame() {
-    // ゲーム中に再度startボタンを押されたときに重複してタイマーを作成しないため
-    if (this.state.isGameStart === true || this.state.timerId !== 0) {
-      return;
-    }
+    if (this.state.isGameStart === true) return;
 
     const id = setInterval(() => {
       this.setState(state => ({ timerValue: state.timerValue + 0.05 }));
@@ -50,7 +49,7 @@ class App extends React.Component {
 
   finishGame() {
     clearInterval(this.state.timerId);
-    this.setState({ isGameFinished: true, timerId: 0 });
+    this.setState({ isGameFinished: true, timerId: 0, nextNumber: 1 });
   }
 
   restartGame() {
@@ -58,6 +57,7 @@ class App extends React.Component {
     this.setState({
       isGameStart: false,
       isGameFinished: false,
+      nextNumber: 1,
       timerValue: 0,
       timerId: 0
     });
@@ -71,6 +71,23 @@ class App extends React.Component {
     const panelNum = Math.pow(levelIndex + 3, 2);
     const panels = [...Array(panelNum).keys()].map(i => i + 1);
     return shuffle(panels);
+  }
+
+  /**
+   * ボタンがクリックされた時に、ゲームを行う
+   */
+  handleSelectedPanel(value) {
+    if (
+      this.state.nextNumber === this.state.panels.length &&
+      this.state.panels.length === value
+    ) {
+      this.finishGame();
+      return;
+    }
+
+    if (this.state.nextNumber === value) {
+      this.setState({ nextNumber: value + 1 });
+    }
   }
 
   render() {
@@ -90,6 +107,7 @@ class App extends React.Component {
         <GameContainer
           // currentLevelIndexが変更されたときにComponentを初期化する
           key={this.state.currentLevelIndex}
+          handleSelectedPanel={this.handleSelectedPanel}
           isGameStart={this.state.isGameStart}
           isGameFinished={this.state.isGameFinished}
           panels={this.state.panels}
