@@ -1,0 +1,12 @@
+.gamePresenterTable {
+  margin: auto;
+}
+
+button.numberPanel {
+  background-color: aliceblue;
+  border: #000;
+  font-size: 20px;
+  height: 100px;
+  margin: 5px;
+  width: 100px;
+}

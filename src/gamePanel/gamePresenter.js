@@ -1,17 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./gamePresenter.css";
 
 function GamePresenter(props) {
   return (
     <div>
-      <table className="gamePresenterBlock">
+      <table className="gamePresenterTable">
         <tbody>
           {convertArr(props.panels).map((row, i) => (
             <tr key={row}>
               {row.map((item, j) => (
                 <td key={item}>
                   <button
-                    className="gamePresenter"
+                    className="numberPanel"
                     onClick={() => {
                       props.handleSelectedPanel(item);
                     }}
