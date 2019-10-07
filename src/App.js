@@ -5,6 +5,7 @@ import shuffle from "lodash/shuffle";
 import { TimerContainer } from "./timer/timerContainer";
 import { LevelContainer } from "./levelSelector/levelContainer";
 import { GameContainer } from "./gamePanel/gameContainer.js";
+import { OperatePresenter } from "./operator/operatePresenter.js";
 
 const LEVEL_LIST = ["かんたん", 2, 3, 4];
 const INIT_LEVEL_INDEX = 0;
@@ -100,10 +101,10 @@ class App extends React.Component {
           currentLevelIndex={this.state.currentLevelIndex}
           isGameStart={this.state.isGameStart}
         />
-        <TimerContainer
+        <TimerContainer value={this.state.timerValue} />
+        <OperatePresenter
           onRestartGame={this.restartGame}
           onGameStart={this.startGame}
-          value={this.state.timerValue}
         />
         <GameContainer
           handleSelectedPanel={this.handleSelectedPanel}
