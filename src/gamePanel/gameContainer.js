@@ -4,7 +4,7 @@ import GamePresenter from "./gamePresenter.js";
 export class GameContainer extends React.Component {
   render() {
     if (!this.props.isGameStart) {
-      return <div />;
+      return null;
     }
 
     if (this.props.isGameFinished) {
