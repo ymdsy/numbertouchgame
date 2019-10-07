@@ -1,5 +1,5 @@
 import React from "react";
 
 export function TimerPresenter(props) {
-  return <div className="timer">{props.value}</div>;
+  return <div>{props.value.toFixed(3)}</div>;
 }

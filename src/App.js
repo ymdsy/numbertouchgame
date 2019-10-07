@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import shuffle from "lodash/shuffle";
 
-import { TimerContainer } from "./timer/timerContainer";
+import { TimerPresenter } from "./timer/timerPresenter.js";
 import LevelPresenter from "./levelSelector/levelPresenter";
 import { GameContainer } from "./gamePanel/gameContainer.js";
 import { OperatePresenter } from "./operator/operatePresenter.js";
@@ -101,7 +101,7 @@ class App extends React.Component {
           levelList={LEVEL_LIST}
           onSelect={this.setLevel}
         />
-        <TimerContainer value={this.state.timerValue} />
+        <TimerPresenter value={this.state.timerValue} />
         <OperatePresenter
           onRestartGame={this.restartGame}
           onGameStart={this.startGame}
