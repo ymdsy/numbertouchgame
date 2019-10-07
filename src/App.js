@@ -3,7 +3,7 @@ import "./App.css";
 import shuffle from "lodash/shuffle";
 
 import { TimerContainer } from "./timer/timerContainer";
-import { LevelContainer } from "./levelSelector/levelContainer";
+import LevelPresenter from "./levelSelector/levelPresenter";
 import { GameContainer } from "./gamePanel/gameContainer.js";
 import { OperatePresenter } from "./operator/operatePresenter.js";
 
@@ -95,11 +95,11 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <LevelContainer
-          onSetLevel={this.setLevel}
-          levelList={LEVEL_LIST}
+        <LevelPresenter
           currentLevelIndex={this.state.currentLevelIndex}
-          isGameStart={this.state.isGameStart}
+          isButtonDisabled={this.state.isGameStart}
+          levelList={LEVEL_LIST}
+          onSelect={this.setLevel}
         />
         <TimerContainer value={this.state.timerValue} />
         <OperatePresenter

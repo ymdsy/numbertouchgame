@@ -6,14 +6,14 @@ import "./levelPresenter.css";
 function LevelPresenter(props) {
   const currentLevel = props.levelList[props.currentLevelIndex];
   return (
-    <div className="levelSelectorBlock">
+    <>
       {props.levelList.map((level, index) => (
         <button
-          disabled={props.isButtonDisabled}
-          key={level}
           className={classNames("levelSelector", {
             levelSelector_active: level === currentLevel
           })}
+          disabled={props.isButtonDisabled}
+          key={level}
           onClick={() => {
             props.onSelect(index);
           }}
@@ -21,7 +21,7 @@ function LevelPresenter(props) {
           {level}
         </button>
       ))}
-    </div>
+    </>
   );
 }
 
