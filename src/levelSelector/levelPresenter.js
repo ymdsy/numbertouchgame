@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import "./levelPresenter.css";
 
-function LevelPresenter(props) {
+export function LevelPresenter(props) {
   const currentLevel = props.levelList[props.currentLevelIndex];
   return (
     <>
@@ -29,5 +29,3 @@ LevelPresenter.propTypes = {
   onSelect: PropTypes.func, //引数にインデックスが渡される関数
   levelList: PropTypes.array.isRequired
 };
-
-export default LevelPresenter;

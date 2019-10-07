@@ -3,7 +3,7 @@ import "./App.css";
 import shuffle from "lodash/shuffle";
 
 import { TimerPresenter } from "./timer/timerPresenter.js";
-import LevelPresenter from "./levelSelector/levelPresenter";
+import { LevelPresenter } from "./levelSelector/levelPresenter";
 import { GameContainer } from "./gamePanel/gameContainer.js";
 import { OperatePresenter } from "./operator/operatePresenter.js";
 
