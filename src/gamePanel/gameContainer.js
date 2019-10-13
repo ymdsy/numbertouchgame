@@ -1,5 +1,6 @@
 import React from "react";
 import GamePresenter from "./gamePresenter.js";
+import NextAnswerPresenter from "./nextAnswerPresenter.js";
 
 export class GameContainer extends React.Component {
   render() {
@@ -17,10 +18,13 @@ export class GameContainer extends React.Component {
     }
 
     return (
-      <GamePresenter
-        panels={this.props.panels}
-        handleSelectedPanel={this.props.handleSelectedPanel}
-      />
+      <div>
+        <NextAnswerPresenter value={this.props.nextAnswer} />
+        <GamePresenter
+          panels={this.props.panels}
+          handleSelectedPanel={this.props.handleSelectedPanel}
+        />
+      </div>
     );
   }
 }

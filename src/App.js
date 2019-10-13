@@ -110,6 +110,7 @@ class App extends React.Component {
           handleSelectedPanel={this.handleSelectedPanel}
           isGameStart={this.state.isGameStart}
           isGameFinished={this.state.isGameFinished}
+          nextAnswer={this.state.nextAnswer}
           panels={this.state.panels}
         />
       </>
