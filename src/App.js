@@ -19,6 +19,7 @@ class App extends React.Component {
       currentLevelIndex: INIT_LEVEL_INDEX,
       nextAnswer: 1,
       panels: [],
+      startedAt: 0,
       timerId: 0,
       timerValue: 0
     };
@@ -38,7 +39,11 @@ class App extends React.Component {
     if (this.state.isGameStart === true) return;
 
     const id = setInterval(() => {
-      this.setState(state => ({ timerValue: state.timerValue + 0.05 }));
+      const now = new Date().getTime();
+      const timerValue = (now - this.state.startedAt) / 1000;
+      this.setState({
+        timerValue: timerValue
+      });
     }, 50);
 
     this.setState({
